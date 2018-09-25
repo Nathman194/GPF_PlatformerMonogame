@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="64" tileheight="64" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" source="Castle Tiles.tsx"/>
+ <layer name="Background" width="20" height="15" locked="1">
+  <data encoding="base64" compression="zlib">
+   eJwTZGBgEByiWIwEtZxk2oFLH7nmUUs/NTAnEsYlR45/QGwjIDYGYhMscoTMR9eLD4thsZ9YP+PC1IwjUsORHumF2n6kpj8JYQA0BhN7
+  </data>
+ </layer>
+ <layer name="Background dec" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJy9k7sKwzAMRbXFS6dCx46pplYQKB7z/18VFyS43MohD4jgIKxwD4pJRETuF1B30HPMxJCcJXne82ni2ELminp0Mq9G8Y7z6j3KfC91l1JWYRbd4O7QNfjMAM4q8W3c3FPAV7zHzoXcmP3VpzF5R7/Jf/F9ZFnrUBNf5o77wRzzhPfNvsM175wwUmbNx17cI+p9wLentv7LZ/NnWADHOiOt
+  </data>
+ </layer>
+ <layer name="C" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwTZmBgEKYylkbDIDEuIOYmAvOg6RPGYYYUA3FABI/7hIg0A908dP9JQ91GrJuQgQwD9nAgxyxKgCUQWwGxHZ31UgK4kdjY0hcoLYmTaTYobSCnQRAWIdE8cxLNc4VifObB1MDMQ8a40hIPVK8Fkn708JJiID5/Y7MHl35seQVb+UCsXgDg8g8Q
+  </data>
+ </layer>
+</map>

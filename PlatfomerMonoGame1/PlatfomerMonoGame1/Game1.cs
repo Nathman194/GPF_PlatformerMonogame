@@ -1,6 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using MonoGame.Extended.Tiled;
+using MonoGame.Extended.Tiled.Graphics;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace PlatfomerMonoGame1
 {
@@ -13,6 +17,10 @@ namespace PlatfomerMonoGame1
         SpriteBatch spriteBatch;
 
         Player player = new Player(); //Create an instance on our player class
+
+        Camera2D camera = null;
+        TiledMap map = null;
+        TiledMapRenderer mapRenderer = null;
 
         public Game1()
         {
@@ -43,6 +51,14 @@ namespace PlatfomerMonoGame1
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             player.Load(Content);   //calls the load function  to player class
+
+            BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+
+            camera = new Camera2D(viewportAdapter);
+            camera.Position = new Vector2(0, graphics.GraphicsDevice.Viewport.Height);
+
+            map = Content.Load<TiledMap>("Map1");
+            mapRenderer = new TiledMapRenderer(GraphicsDevice);
         }
 
         /// <summary>
@@ -78,8 +94,13 @@ namespace PlatfomerMonoGame1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            var viewMatrix = camera.GetViewMatrix();
+            var projectionMatrix = Matrix.CreateOrthographicOffCenter(0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, 0, 0f, -1f);
+
             //bagen drawing
-            spriteBatch.Begin();
+            spriteBatch.Begin(transformMatrix: viewMatrix);
+
+            mapRenderer.Draw(map, ref viewMatrix, ref projectionMatrix);
             //call the 'draw' function frome our player class
             player.Draw(spriteBatch);
             //finish drawing 
