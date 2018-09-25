@@ -5,6 +5,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Graphics;
 using MonoGame.Extended.ViewportAdapters;
+using System.Collections;
 
 namespace PlatfomerMonoGame1
 {
@@ -21,6 +22,13 @@ namespace PlatfomerMonoGame1
         Camera2D camera = null;
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
+        TiledMapTileLayer collistionLayer;
+        public ArrayList allCollistionTiles = new ArrayList();
+        public Sprite[,] levelGrid;
+
+        public int tileHight = 0;
+        public int levelTileWidth = 0;
+        public int levelTileHight = 0;
 
         public Game1()
         {
@@ -50,7 +58,7 @@ namespace PlatfomerMonoGame1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            player.Load(Content);   //calls the load function  to player class
+            player.Load(Content, this);   //calls the load function  to player class
 
             BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
 
@@ -83,6 +91,8 @@ namespace PlatfomerMonoGame1
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);     // call 'update' function' from player class
 
+            camera.Position = player.playerSprit.position - new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+
             base.Update(gameTime);
         }
 
@@ -107,6 +117,22 @@ namespace PlatfomerMonoGame1
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void setUpTiles()
+        {
+            tileHight = map.TileHeight;
+            levelTileHight = map.TileHeight;
+            levelTileWidth = map.TileWidth;
+            levelGrid = new Sprite[levelTileWidth, levelTileHight];
+
+            foreach (TiledMapTileLayer layer in map.TileLayers)
+            {
+                if (layer.Name == "contact Lay")
+                {
+                    collistionLayer = layer;
+                }
+            }
         }
     }
 }
